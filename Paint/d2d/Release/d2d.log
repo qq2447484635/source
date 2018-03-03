@@ -1,0 +1,29 @@
+﻿  Canvas2D.cpp
+c:\users\qq244\source\repos\d2d\d2d\Canvas2D.h(92): warning C4305: “初始化”: 从“double”到“float”截断
+Canvas2D.cpp(14): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+Canvas2D.cpp(116): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+Canvas2D.cpp(124): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+Canvas2D.cpp(127): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+Canvas2D.cpp(127): warning C4244: “参数”: 从“unsigned long”转换到“FLOAT”，可能丢失数据
+Canvas2D.cpp(127): warning C4244: “参数”: 从“LONG”转换到“FLOAT”，可能丢失数据
+Canvas2D.cpp(133): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+Canvas2D.cpp(166): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+Canvas2D.cpp(167): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+Canvas2D.cpp(203): warning C4838: 从“double”转换到“float”需要收缩转换
+Canvas2D.cpp(203): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+Canvas2D.cpp(258): warning C4018: “<”: 有符号/无符号不匹配
+Canvas2D.cpp(339): warning C4244: “初始化”: 从“clock_t”转换到“float”，可能丢失数据
+Canvas2D.cpp(340): warning C4244: “初始化”: 从“clock_t”转换到“float”，可能丢失数据
+Canvas2D.cpp(345): warning C4244: “=”: 从“clock_t”转换到“float”，可能丢失数据
+Canvas2D.cpp(446): warning C4018: “<”: 有符号/无符号不匹配
+  main.cpp
+c:\users\qq244\source\repos\d2d\d2d\Canvas2D.h(92): warning C4305: “初始化”: 从“double”到“float”截断
+main.cpp(55): warning C4018: “<”: 有符号/无符号不匹配
+main.cpp(75): warning C4244: “参数”: 从“double”转换到“FLOAT”，可能丢失数据
+main.cpp(84): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+main.cpp(88): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+main.cpp(96): warning C4244: “参数”: 从“double”转换到“FLOAT”，可能丢失数据
+main.cpp(106): warning C4244: “参数”: 从“double”转换到“FLOAT”，可能丢失数据
+Canvas2D.obj : error LNK2001: 无法解析的外部符号 __imp__DWriteCreateFactory@12
+Canvas2D.obj : error LNK2001: 无法解析的外部符号 _D2D1CreateFactory@16
+C:\Users\qq244\source\repos\d2d\Release\d2d.exe : fatal error LNK1120: 2 个无法解析的外部命令

@@ -1,0 +1,23 @@
+﻿  Canvas2D.cpp
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.h(93): warning C4305: “初始化”: 从“double”到“float”截断
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(14): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(116): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(124): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(127): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(127): warning C4244: “参数”: 从“unsigned long”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(127): warning C4244: “参数”: 从“LONG”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(133): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(166): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(167): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(223): warning C4305: “+=”: 从“double”到“float”截断
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(235): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(247): warning C4305: “+=”: 从“double”到“float”截断
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(252): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(270): warning C4018: “>=”: 有符号/无符号不匹配
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(272): warning C4305: “+=”: 从“double”到“float”截断
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(281): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(372): warning C4244: “初始化”: 从“clock_t”转换到“float”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(373): warning C4244: “初始化”: 从“clock_t”转换到“float”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(378): warning C4244: “=”: 从“clock_t”转换到“float”，可能丢失数据
+c:\users\qq244\source\repos\d2d\d2d\canvas2d.cpp(479): warning C4018: “<”: 有符号/无符号不匹配
+  d2d.vcxproj -> C:\Users\qq244\source\repos\d2d\Debug\d2d.exe

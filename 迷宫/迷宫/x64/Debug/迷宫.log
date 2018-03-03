@@ -1,0 +1,6 @@
+﻿  迷宫.cpp
+c:\users\qq244\source\repos\project\迷宫\迷宫\迷宫.cpp(68): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+c:\users\qq244\source\repos\project\迷宫\迷宫\迷宫.cpp(107): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\conio.h(452): note: 参见“getch”的声明
+c:\users\qq244\source\repos\project\迷宫\迷宫\迷宫.cpp(140): warning C4838: 从“int”转换到“SHORT”需要收缩转换
+  迷宫.vcxproj -> C:\Users\qq244\source\repos\Project\迷宫\x64\Debug\迷宫.exe
