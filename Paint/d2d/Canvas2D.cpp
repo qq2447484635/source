@@ -1,4 +1,5 @@
 #include "Canvas2D.h"
+
 Vec2 BezierV(std::deque<Vec2>&P,int stage,float t, int n)
 {
 	if (n == 1)
@@ -197,15 +198,16 @@ void Canvas2D::MousePainting(float DeltaTime)
 	static std::deque<Vec2> P;
 	static bool clicked = false;
 	static bool ctrl = false;
-	POINT cPos;
-	RECT wRect;
-	GetWindowRect(_hWnd, &wRect);
-	GetCursorPos(&cPos);
-	CursorPos = { (cPos.x - wRect.left - Rect.right / 2.0f) / ScaleRate + x - 10.0f / ScaleRate,(cPos.y - wRect.top - 30.0f / ScaleRate - Rect.bottom / 2.0f) / ScaleRate + y };
+	POINT cpos;
+	GetCursorPos(&cpos);
+	ScreenToClient(_hWnd,&cpos);
+	CursorPos = { (cpos.x - Rect.right / 2.0f) / ScaleRate + x,(cpos.y - Rect.bottom / 2.0f) / ScaleRate + y };
+	//CursorPos = {cPos.x-wRect.left+x-Rect.right/2.0f,cPos.y-wRect.top+y-Rect.bottom/2.0f-ty};
+	//{ (cPos.x - wRect.left - Rect.right / 2.0f) / ScaleRate + x - 10.0f / ScaleRate,(cPos.y - wRect.top - 30.0f / ScaleRate - Rect.bottom / 2.0f) / ScaleRate + y };
 	{//draw Pos
 		Brush->SetColor(D2D1::ColorF(D2D1::ColorF::DodgerBlue));
 		RT->FillEllipse(D2D1::Ellipse(D2D1::Point2F(CursorPos.x, CursorPos.y), 3, 3), Brush);
-		swprintf_s(TEXTACHE, L"Paint Demo\nx :%.0f \ny : %.0f \nPress Key 'C' to clear all \nPress Key 'R' to return (0,0)\nHold Ctrl and select %d points to create a BezierCurve\nUse Q and E to change Order\nOrder: %d", CursorPos.x, CursorPos.y, stage + 1, stage);
+		swprintf_s(TEXTACHE, L"Paint Demo\nx :%.0f \ny : %.0f \nPress Key 'C' to clear all \nPress Key 'R' to return (0,0)\nHold Ctrl and select %d points to create a BezierCurve\nUse Q and E to change Order\nOrder: %d\nx:%d,y%d",CursorPos.x,CursorPos.y, stage + 1, stage,cpos.x,cpos.y);
 		wFac->CreateTextFormat(L"Î¢ÈíÑÅºÚ", NULL, DWRITE_FONT_WEIGHT_REGULAR,
 			DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL,
 			18, L"chs", &Format);

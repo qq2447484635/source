@@ -19,7 +19,6 @@
 #endif 
 
 
-
 template<class Interface>
 inline void
 SafeRelease(
@@ -90,7 +89,7 @@ public:
 	D2D1_MATRIX_3X2_F Position;
 	D2D1_MATRIX_3X2_F Scale;
 	D2D1_MATRIX_3X2_F Extra;
-	float ScaleRate=0.8;
+	float ScaleRate=0.6;
 };
 
 extern ID2D1HwndRenderTarget *g_RT;
