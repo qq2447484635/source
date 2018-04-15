@@ -1,14 +1,21 @@
 ﻿  Canvas2D.cpp
-c:\users\qq244\source\repos\source\paint\d2d\canvas2d.h(92): warning C4305: “初始化”: 从“double”到“float”截断
+c:\users\qq244\source\repos\source\paint\d2d\canvas2d.h(85): warning C4305: “初始化”: 从“double”到“float”截断
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(15): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(117): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(125): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(128): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
-c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(128): warning C4244: “参数”: 从“unsigned long”转换到“FLOAT”，可能丢失数据
-c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(128): warning C4244: “参数”: 从“LONG”转换到“FLOAT”，可能丢失数据
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(134): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(149): error C2039: “DrawTextW”: 不是“ID2D1HwndRenderTarget”的成员
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\d2d1.h(3262): note: 参见“ID2D1HwndRenderTarget”的声明
+c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(155): error C2039: “DrawTextW”: 不是“ID2D1HwndRenderTarget”的成员
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\d2d1.h(3262): note: 参见“ID2D1HwndRenderTarget”的声明
+c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(167): error C2039: “DrawTextW”: 不是“ID2D1BitmapRenderTarget”的成员
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\d2d1.h(3250): note: 参见“ID2D1BitmapRenderTarget”的声明
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(167): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(168): error C2039: “DrawTextW”: 不是“ID2D1BitmapRenderTarget”的成员
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\d2d1.h(3250): note: 参见“ID2D1BitmapRenderTarget”的声明
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(168): warning C4244: “参数”: 从“int”转换到“FLOAT”，可能丢失数据
+c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(214): error C2039: “DrawTextW”: 不是“ID2D1HwndRenderTarget”的成员
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\d2d1.h(3262): note: 参见“ID2D1HwndRenderTarget”的声明
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(225): warning C4305: “+=”: 从“double”到“float”截断
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(237): warning C4018: “<”: 有符号/无符号不匹配
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(249): warning C4305: “+=”: 从“double”到“float”截断
@@ -20,7 +27,3 @@ c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(374): warning C4244: �
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(375): warning C4244: “初始化”: 从“clock_t”转换到“float”，可能丢失数据
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(380): warning C4244: “=”: 从“clock_t”转换到“float”，可能丢失数据
 c:\users\qq244\source\repos\source\paint\d2d\canvas2d.cpp(481): warning C4018: “<”: 有符号/无符号不匹配
-  正在生成代码...
-  正在跳过...(未检测到相关更改)
-  main.cpp
-  d2d.vcxproj -> C:\Users\qq244\source\repos\source\Paint\Debug\d2d.exe

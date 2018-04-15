@@ -1,7 +1,4 @@
 #pragma once
-#define UNICODE
-#define debug_info
-//#define ShowInConsole
 #include <time.h>
 #include <deque>
 #include <windows.h>
@@ -13,25 +10,10 @@
 #include <cstring>
 #include <dwrite.h>
 #include "Polygon.h"
-
-#ifndef ShowInConsole
-#pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )
-#endif 
+#include "M.h"
+#include "Framework.h"
 
 
-template<class Interface>
-inline void
-SafeRelease(
-	Interface **ppInterfaceToRelease
-)
-{
-	if (*ppInterfaceToRelease != NULL)
-	{
-		(*ppInterfaceToRelease)->Release();
-
-		(*ppInterfaceToRelease) = NULL;
-	}
-}
 
 struct _LoadPictureResource
 {
@@ -46,26 +28,19 @@ struct _LoadPictureResource
 };
 
 class Canvas2D
+	:public WinComponent
 {
 public:
-	Canvas2D();
+	Canvas2D(ID2D1HwndRenderTarget *pRT,HWND hWnd);
 	~Canvas2D();
 
-	HINSTANCE _hInstance;
-	HWND _hWnd;
-	BOOL initWin();
 	ID2D1HwndRenderTarget *RT = NULL;
-	ID2D1Factory *Factory = NULL;
-	ATOM                MyRegisterClass(HINSTANCE hInstance);
-	BOOL                InitInstance(HINSTANCE, int);
-	static LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-	void _cdecl OnRender(float DeltaTime=0);
-	static void _cdecl RunMessageLoop(void *arg=NULL);
-	static void Show();
-	void OnUpdata(float DeltaTime=0);
+	HWND _hWnd;
+
+	void  OnRender(float DeltaTime=0);
+	void  OnUpdata(float DeltaTime=0);
 	void CreateResource();
 	void Debug_HUD( float DeltaTime=0);
-	void FrameUpdata(float DeltaTime=0);
 	void MousePainting(float DeltaTime);
 	D2D1_MATRIX_3X2_F ToCenterM(ID2D1RenderTarget *RT);
 	_LoadPictureResource LoadPictureResource;
@@ -91,6 +66,3 @@ public:
 	D2D1_MATRIX_3X2_F Extra;
 	float ScaleRate=0.6;
 };
-
-extern ID2D1HwndRenderTarget *g_RT;
-Vec2 BezierV(std::deque<Vec2>&P, int stage, float t, int n = 1);

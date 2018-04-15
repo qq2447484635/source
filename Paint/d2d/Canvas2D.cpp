@@ -18,68 +18,24 @@ Vec2 BezierV(std::deque<Vec2>&P,int stage,float t, int n)
 
 ID2D1HwndRenderTarget *g_RT=NULL;
 
-Canvas2D::Canvas2D()
+Canvas2D::Canvas2D(ID2D1HwndRenderTarget *pRT,HWND hWnd)
 {
-	HRESULT hr;
-	initWin();
-	hr = RT->CreateCompatibleRenderTarget(D2D1::SizeF(4096,4096),&bitmapRT);
-	hr = RT->CreateCompatibleRenderTarget(D2D1::SizeF(4096, 4096), &AxisRT);
+	_hWnd = hWnd;
+	RT = pRT;
+	RT->CreateCompatibleRenderTarget(D2D1::SizeF(4096,4096),&bitmapRT);
+	RT->CreateCompatibleRenderTarget(D2D1::SizeF(4096, 4096), &AxisRT);
+	CreateResource();
 }
 
 Canvas2D::~Canvas2D()
 {
-	SafeRelease(&Factory);
-	SafeRelease(&RT);
 	SafeRelease(&Brush);
 	SafeRelease(&wFac);
 	SafeRelease(&bitmapRT);
 	SafeRelease(&AxisRT);
 	SafeRelease(&Axis);
-	CoUninitialize();
 }
 
-BOOL Canvas2D::initWin()
-{
-	HRESULT hr;
-	hr = CoInitialize(NULL);
-	if (!SUCCEEDED(hr))
-	{
-		throw L"Com initialize fail ";
-		exit(0);
-	}
-	_hInstance = 0;//GetModuleHandle(NULL);
-
-#ifndef ShowInConsole
-	MyRegisterClass(_hInstance);
-
-	if (!InitInstance(_hInstance, SW_SHOW))
-	{
-		
-		return FALSE;
-	}
-#endif
-#ifdef ShowInConsole
-	_hWnd = GetConsoleWindow();
-#endif
-	RECT Rect;
-	GetClientRect(_hWnd, &Rect);
-	hr=D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &Factory);
-	Factory->CreateHwndRenderTarget(
-		D2D1::RenderTargetProperties(),
-		D2D1::HwndRenderTargetProperties(_hWnd, D2D1::SizeU(Rect.right, Rect.bottom)),
-		&RT
-	);
-	if(SUCCEEDED(hr))
-	{
-		LoadPictureResource.RT = this->RT;
-		CreateResource();
-	}
-	else
-	{
-		exit(-1);
-	}
-	return 0;
-}
 
 void Canvas2D::CreateResource()
 {
@@ -87,23 +43,28 @@ void Canvas2D::CreateResource()
 	DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory), reinterpret_cast<IUnknown**>(&wFac));
 }
 
-void _cdecl Canvas2D::OnRender(float DeltaTime)
+void  Canvas2D::OnRender(float DeltaTime)
 {
-	if (!IsWindowVisible(_hWnd))
-	{
-		return;
-	}
+	RT->Clear(D2D1::ColorF(D2D1::ColorF::White));
 	GetClientRect(_hWnd, &Rect);
 	RT->Resize(D2D1::SizeU(Rect.right, Rect.bottom));
 	Position = { 1,0,0,1,-x,-y };
 	ToScreemCenter = { 1,0,0,1,(Rect.right - Rect.left) / 2.0f,(Rect.bottom - Rect.top) / 2.0f };
 	RT->BeginDraw();
 	RT->SetTransform(ToScreemCenter*Position);
-	FrameUpdata(DeltaTime);
-#ifdef debug_info
+	//MousePainting(DeltaTime);
 	Debug_HUD(DeltaTime);
-#endif 
+	if (Paper)
+	{
+		RT->DrawBitmap(Paper, D2D1::RectF(0, 0, Paper->GetSize().width, Paper->GetSize().height));
+	//	SafeRelease(&Paper);
+	}
 	RT->EndDraw();
+}
+
+void  Canvas2D::OnUpdata(float DeltaTime)
+{
+
 }
 
 void Canvas2D::Debug_HUD(float DeltaTime)
@@ -125,7 +86,7 @@ void Canvas2D::Debug_HUD(float DeltaTime)
 		FPS = 1.0 / DeltaTime;
 	}
 	swprintf_s(TEXTACHE, L"FPS %.0f", FPS);
-	RT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(Rect.right, Rect.top, Rect.right - fontsize * wcslen(TEXTACHE), fontsize), Brush);
+	//RT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(Rect.right, Rect.top, Rect.right - fontsize * wcslen(TEXTACHE), fontsize), Brush);
 	SafeRelease(&Format);
 
 	fontsize = 12;
@@ -146,13 +107,13 @@ void Canvas2D::Debug_HUD(float DeltaTime)
 			for (int i = (int)x / 100 * 100 - 1000; i < (int)x / 100 * 100 + 1000; i += 100)
 			{
 				swprintf_s(TEXTACHE, L"%d", i);
-				RT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(i - x, 0, i - x + 40, 0 + 20), Brush);//x axis
+				RT->DrawTextA(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(i - x, 0, i - x + 40, 0 + 20), Brush);//x axis
 				RT->DrawLine(D2D1::Point2F(i - x, -10), D2D1::Point2F(i - x, 10), Brush);
 			}
 			for (int i = (int)y / 100 * 100 - 1000; i < (int)y / 100 * 100 + 1000; i += 100)
 			{
 				swprintf_s(TEXTACHE, L"%d", i);
-				RT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(0, i - y, 0 + 40, i - y + 20), Brush);//y axis
+				RT->DrawTextA(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(0, i - y, 0 + 40, i - y + 20), Brush);//y axis
 				RT->DrawLine(D2D1::Point2F(-10, i - y), D2D1::Point2F(10, i - y), Brush);
 			}
 		}
@@ -164,12 +125,16 @@ void Canvas2D::Debug_HUD(float DeltaTime)
 			for (int i = -2000; i < 2000; i += 100)
 			{
 				swprintf_s(TEXTACHE, L"%.1f", i / 100.0);
-				AxisRT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(0, i, 40, i + 20), Brush);
-				AxisRT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(i, 0, i + 40, 20), Brush);
+				AxisRT->DrawTextA(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(0, i, 40, i + 20), Brush);
+				AxisRT->DrawTextA(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(i, 0, i + 40, 20), Brush);
 			}
 		}
 		AxisDraw = true;
 		AxisRT->EndDraw();
+	}
+	else if(Axis)
+	{
+		RT->DrawBitmap(Axis, D2D1::RectF(Axis->GetSize().width / -2.0, Axis->GetSize().height / -2.0, Axis->GetSize().width / 2.0, Axis->GetSize().height / 2.0));
 	}
 
 	SafeRelease(&Format);
@@ -202,8 +167,6 @@ void Canvas2D::MousePainting(float DeltaTime)
 	GetCursorPos(&cpos);
 	ScreenToClient(_hWnd,&cpos);
 	CursorPos = { (cpos.x - Rect.right / 2.0f) / ScaleRate + x,(cpos.y - Rect.bottom / 2.0f) / ScaleRate + y };
-	//CursorPos = {cPos.x-wRect.left+x-Rect.right/2.0f,cPos.y-wRect.top+y-Rect.bottom/2.0f-ty};
-	//{ (cPos.x - wRect.left - Rect.right / 2.0f) / ScaleRate + x - 10.0f / ScaleRate,(cPos.y - wRect.top - 30.0f / ScaleRate - Rect.bottom / 2.0f) / ScaleRate + y };
 	{//draw Pos
 		Brush->SetColor(D2D1::ColorF(D2D1::ColorF::DodgerBlue));
 		RT->FillEllipse(D2D1::Ellipse(D2D1::Point2F(CursorPos.x, CursorPos.y), 3, 3), Brush);
@@ -211,7 +174,7 @@ void Canvas2D::MousePainting(float DeltaTime)
 		wFac->CreateTextFormat(L"微软雅黑", NULL, DWRITE_FONT_WEIGHT_REGULAR,
 			DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL,
 			18, L"chs", &Format);
-		RT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(-700, -400, 200, 90), Brush);
+		RT->DrawTextA(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(-700, -400, 200, 90), Brush);
 		SafeRelease(&Format);
 	}
 
@@ -224,7 +187,7 @@ void Canvas2D::MousePainting(float DeltaTime)
 			L.clear();
 			for (float t = 0.0f; t < 1.f; t += 0.02)
 			{
-				B = BezierV(P, P.size() - 1, t);
+				B = BezierV(P, P.size() - 1, t,0);
 				L.push_back(B);
 			}
 		}
@@ -248,7 +211,7 @@ void Canvas2D::MousePainting(float DeltaTime)
 		{
 			for (float t = 0.0f; t < 1.f; t += 0.02)
 			{
-				B = BezierV(P, P.size() - 1, t);
+				B = BezierV(P, P.size() - 1, t,0);
 				L.push_back(B);
 			}
 			for (int i = 0; i < L.size() - 1; i++)
@@ -273,7 +236,7 @@ void Canvas2D::MousePainting(float DeltaTime)
 		{
 			for (float t = 0.0f; t < 1.f; t += 0.02)
 			{
-				B = BezierV(P, P.size() - 1, t);
+				B = BezierV(P, P.size() - 1, t,0);
 				L.push_back(B);
 			}
 			for (int i = 0; i < stage; i++)
@@ -304,108 +267,6 @@ void Canvas2D::MousePainting(float DeltaTime)
 D2D1_MATRIX_3X2_F Canvas2D::ToCenterM(ID2D1RenderTarget * RT)
 {
 	return D2D1::Matrix3x2F(1,0,0,1,RT->GetSize().width/2.0f,RT->GetSize().height/2.0f);
-}
-
-ATOM Canvas2D::MyRegisterClass(HINSTANCE hInstance)
-{
-	WNDCLASSEX wcex = { sizeof(WNDCLASSEX) };
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = sizeof(LONG_PTR);
-	wcex.hInstance = hInstance;
-	wcex.hbrBackground = NULL;
-	wcex.lpszMenuName = NULL;
-	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wcex.lpszClassName = L"DxW";
-	RegisterClassEx(&wcex);
-	return RegisterClassEx(&wcex);
-}
-
-BOOL Canvas2D::InitInstance(HINSTANCE hInstance, int nCmdShow)
-{
-	_hInstance = hInstance; // 将实例句柄存储在全局变量中
-	_hWnd = CreateWindow(
-		L"DxW",
-		L"DxW", 
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		1300,
-		800,	
-		nullptr,
-		nullptr,
-		hInstance,
-		this);
-	if (!_hWnd)
-	{
-		return FALSE;
-	}
-	ShowWindow(_hWnd,SW_SHOW);
-	UpdateWindow(_hWnd);
-	//MessageBox(0, TEXT("sd"), TEXT("sdaf"), 0);
-
-	return TRUE;
-}
-
-LRESULT CALLBACK Canvas2D::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	switch (message)
-	{
-	case WM_PAINT:
-	{
-
-	}
-	break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
-	}
-	return 0;
-}
-
-void _cdecl Canvas2D::RunMessageLoop(void *arg)
-{
-	Canvas2D *pWin = new Canvas2D;
-	g_RT = pWin->RT;
-	MSG msg;
-	float DeltaTime = clock();
-	float now=clock();
-	float past;
-	while (GetMessage(&msg, (HWND)arg, 0, 0))
-	{
-		past = now;
-		now = clock();
-		DeltaTime = now-past;
-		pWin->OnUpdata(DeltaTime/1000.0f);
-		pWin->OnRender(DeltaTime/1000.0f);
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-	delete pWin;
-}
-
-void Canvas2D::Show()
-{
-#ifdef ShowInConsole
-	Canvas2D a;
-	float now = clock(), past, delta;
-	past = now;
-	while (1)
-	{
-		now = clock();
-		delta = now - past;
-		past = now;
-		a.OnUpdata(delta / 1000.0);
-		a.OnRender(delta / 1000.0);
-	}
-	return;
-#endif
-	uintptr_t handle;
-	handle = _beginthread(Canvas2D::RunMessageLoop, 0, 0);
-	WaitForSingleObject(reinterpret_cast<HANDLE>(handle), INFINITE);
 }
 
 HRESULT _LoadPictureResource::operator()(LPCWSTR Path, ID2D1Bitmap ** ppBitmap)

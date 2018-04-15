@@ -79,6 +79,7 @@
     </ClCompile>
     <Link>
       <AdditionalOptions>d2d1.lib dwrite.lib %(AdditionalOptions)</AdditionalOptions>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,12 +120,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Canvas2D.h" />
+    <ClInclude Include="DemoApp.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="M.h" />
     <ClInclude Include="Polygon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Canvas2D.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="DemoApp.cpp" />
     <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

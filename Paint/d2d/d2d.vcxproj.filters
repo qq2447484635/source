@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\Frame">
+      <UniqueIdentifier>{e5c2a098-a63b-449c-8803-63cc657aa972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Canvas2D.h">
@@ -21,15 +24,27 @@
     <ClInclude Include="Polygon.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>头文件\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="M.h">
+      <Filter>头文件\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoApp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Canvas2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Polygon.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Polygon.cpp">
+    <ClCompile Include="Program.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DemoApp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
