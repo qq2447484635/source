@@ -45,21 +45,19 @@ void Canvas2D::CreateResource()
 
 void  Canvas2D::OnRender(float DeltaTime)
 {
-	RT->Clear(D2D1::ColorF(D2D1::ColorF::White));
+	//RT->Clear(D2D1::ColorF(D2D1::ColorF::White));
 	GetClientRect(_hWnd, &Rect);
 	RT->Resize(D2D1::SizeU(Rect.right, Rect.bottom));
 	Position = { 1,0,0,1,-x,-y };
 	ToScreemCenter = { 1,0,0,1,(Rect.right - Rect.left) / 2.0f,(Rect.bottom - Rect.top) / 2.0f };
-	RT->BeginDraw();
 	RT->SetTransform(ToScreemCenter*Position);
-	//MousePainting(DeltaTime);
+//	MousePainting(DeltaTime);
 	Debug_HUD(DeltaTime);
 	if (Paper)
 	{
 		RT->DrawBitmap(Paper, D2D1::RectF(0, 0, Paper->GetSize().width, Paper->GetSize().height));
 	//	SafeRelease(&Paper);
 	}
-	RT->EndDraw();
 }
 
 void  Canvas2D::OnUpdata(float DeltaTime)
@@ -76,7 +74,7 @@ void Canvas2D::Debug_HUD(float DeltaTime)
 	hr = wFac->CreateTextFormat(L"Î¢ÈíÑÅºÚ", NULL, DWRITE_FONT_WEIGHT_REGULAR,
 		DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL,
 		fontsize, L"chs", &Format);
-	RT->SetTransform(D2D1::IdentityMatrix());
+	//RT->SetTransform(D2D1::IdentityMatrix());
 	Brush->SetColor(D2D1::ColorF(D2D1::ColorF::Black));
 	//swprintf_s(TEXTACHE, L"x=%.1lf,y=%.1lf", x, y);
 	//RT->DrawTextW(TEXTACHE, wcslen(TEXTACHE), Format, D2D1::RectF(0, 0, fontsize*wcslen(TEXTACHE), fontsize), Brush);
@@ -131,10 +129,12 @@ void Canvas2D::Debug_HUD(float DeltaTime)
 		}
 		AxisDraw = true;
 		AxisRT->EndDraw();
+		AxisRT->GetBitmap(&Axis);
 	}
 	else if(Axis)
 	{
 		RT->DrawBitmap(Axis, D2D1::RectF(Axis->GetSize().width / -2.0, Axis->GetSize().height / -2.0, Axis->GetSize().width / 2.0, Axis->GetSize().height / 2.0));
+		RT->FillRectangle(D2D1::RectF(0, 0, 100, 100), Brush);
 	}
 
 	SafeRelease(&Format);
