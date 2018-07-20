@@ -15,27 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Paint\d2d\Framework.h">
-      <Filter>资源文件</Filter>
+    <ClInclude Include="DevicesResource.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Paint\d2d\M.h">
-      <Filter>资源文件</Filter>
+    <ClInclude Include="Framework.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Paint\d2d\Canvas2D.h">
-      <Filter>资源文件</Filter>
+    <ClInclude Include="DemoApp.h">
+      <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Paint\d2d\DemoApp.h">
+    <ClInclude Include="App.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Paint\d2d\Main.cpp">
+    <ClCompile Include="App.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DevicesResource.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Paint\d2d\Canvas2D.cpp">
-      <Filter>资源文件</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Paint\d2d\DemoApp.cpp">
+    <ClCompile Include="DemoApp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
