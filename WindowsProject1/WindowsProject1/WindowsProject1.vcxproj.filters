@@ -19,33 +19,12 @@
     <Filter Include="头文件\MyClass">
       <UniqueIdentifier>{153ce5ec-27d4-462f-87bd-84be63b9757d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\BASIC">
+      <UniqueIdentifier>{89f49772-ed55-4329-a4de-f248d56df7bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="App.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DemoApp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DevicesResource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Canvas.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="StepTimer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="threadsafe_queue.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -54,28 +33,55 @@
     <ClInclude Include="Rain.h">
       <Filter>头文件\MyClass</Filter>
     </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="DevicesResource.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="StepTimer.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="threadsafe_queue.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>头文件\BASIC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="DemoApp.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DevicesResource.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Rain.cpp">
       <Filter>头文件\MyClass</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>头文件\BASIC</Filter>
+    </ClCompile>
+    <ClCompile Include="DevicesResource.cpp">
+      <Filter>头文件\BASIC</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>头文件\BASIC</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>头文件\BASIC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

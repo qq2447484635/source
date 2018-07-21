@@ -7,23 +7,27 @@
 #include "threadsafe_queue.h"
 
 class App :
-	public
-	Framework
+	public	Framework,
+	public Component
 {
 public:
 	App();
-	~App();
-	virtual void Render() {};
-	virtual void Update(double) {};
+	virtual ~App();
+	virtual void Render(ID2D1HwndRenderTarget *rt)
+	{ 
+		//rt->Clear(); 
+		Component::Render(rt);
+	};
+	virtual void Update(double deltatime)
+	{
+		Component::Update(deltatime);
+	};
 	virtual void RunMessageLoop();
 	virtual ComPtr<ID2D1Brush> GetDeafaultBrush();
 	virtual ComPtr<IDWriteTextFormat> GetDeafaultWriteTextFomat();
-	WCHAR* GetFpsText();
-	int GetFps();
-	HRESULT Initialize();
-protected:
-	ComPtr<ID2D1HwndRenderTarget> m_RenderTarget;
-	ComPtr<ID2D1BitmapRenderTarget> bitmapRT;
+	virtual WCHAR* GetFpsText();
+	virtual int GetFps();
+	virtual HRESULT Initialize();
 private:
 	threadsafe_queue<ComPtr<ID2D1Bitmap>> frame_queue;
 	WCHAR fps_text[8];

@@ -11,34 +11,41 @@ public:
 	}v,pos;
 	Tear()
 	{
-		pos.x = rand() % Application::RESOLUTION_W;
+		pos.x = rand() % Application::RESOLUTION_W-100;
 		pos.y = -rand()%Application::RESOLUTION_H;
-		v.x = 0.0;
+		v.x = rand()%50+50;
 		v.y = rand() % 150 + 300;
 	}
 };
 
-class Rain
+class Rain :
+	public Component
 {
 public:
 	Rain()
 	{
-		for (int i = 0; i < 400; i++)
+		for (int i = 0; i <100; i++)
 		{
 			tears.push_back(Tear());
 		}
 	}
+
 	~Rain();
+
 	std::list<Tear> tears;
-	void render(ID2D1HwndRenderTarget *rt,ID2D1Brush *brush)
+
+	void Render(ID2D1HwndRenderTarget *rt)
 	{
+		ComPtr<ID2D1SolidColorBrush> brush;
+		rt->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &brush);
+		brush->SetOpacity(0.6);
 		for (list<Tear>::iterator i = tears.begin(); i != tears.end(); i++)
 		{
-			rt->FillEllipse(D2D1::Ellipse(D2D1::Point2F(i->pos.x, i->pos.y), 1, 5), brush);
+			rt->FillEllipse(D2D1::Ellipse(D2D1::Point2F(i->pos.x, i->pos.y), 1, 5), brush.Get());
 		}
 	}
 
-	void update(double deltatime)
+	void Update(double deltatime)
 	{
 		for (list<Tear>::iterator i = tears.begin(); i != tears.end();)
 		{
@@ -56,5 +63,12 @@ public:
 		}
 	}
 
+	void AddTears(int num)
+	{
+		for (int i = 0; i < num; i++)
+		{
+			tears.push_back(Tear());
+		}
+	}
 };
 

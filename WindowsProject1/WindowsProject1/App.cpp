@@ -18,11 +18,11 @@ void App::RunMessageLoop()
 		double deltatime = 0.0;
 		while (msg.message != WM_QUIT)
 		{
-			m_timer.Tick([&]() {
-				deltatime = m_timer.GetElapsedSeconds();
-				Update(deltatime);
-				Render();
-			});
+				m_timer.Tick([&]() {
+					deltatime = m_timer.GetElapsedSeconds();
+					Update(deltatime);
+					Render(m_RenderTarget.Get());
+				});
 			/*double interval = (1 / 60.0 - m_timer.GetElapsedSeconds())*1000;
 			if(interval>0)
 				Sleep(interval);*/
@@ -73,10 +73,6 @@ HRESULT App::Initialize()
 			&m_RenderTarget
 		);
 	}
-
-	D2D1_SIZE_F sizef = { m_RenderTarget->GetSize() };
-	D2D1_SIZE_U sizeu = { sizef.width,sizef.height };
-	m_RenderTarget->CreateCompatibleRenderTarget(&bitmapRT);
 	return hr;
 }
 

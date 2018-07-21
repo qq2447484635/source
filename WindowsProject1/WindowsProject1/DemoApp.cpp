@@ -10,8 +10,21 @@ DemoApp::DemoApp()
 	/***********************************************/
 	center.x = center.y = 350;
 	Current_Radian = 0.0f;
-	RadianPerSec = _2PI/3.0f;
+	RadianPerSec = _2PI / 3.0f;
 	length = 150;
+
+	AddComponent(rain);
+	thread r2([&]() 
+	{
+		int a = 5;
+		while (a > 0)
+		{
+			Sleep(2500);
+			rain.AddTears(100);
+			a--;
+		}
+	});
+	r2.detach();
 }
 
 
@@ -19,40 +32,48 @@ DemoApp::~DemoApp()
 {
 }
 
-void DemoApp::Render()
+void DemoApp::Render(ID2D1HwndRenderTarget *RT)
 {
 	/********************************************TITLE***********************************/
 	SetWindowTextW(m_RenderTarget->GetHwnd(), GetFpsText());
 	/************************************************************************************/
 	int start = clock();
-
-	m_RenderTarget->BeginDraw();
-	m_RenderTarget->Clear();
+	RT->BeginDraw();
 	/******************************************PAINT***********************************/
 	ComPtr<ID2D1Brush> Brush = GetDeafaultBrush();
-
-	/*for (int i = 0; i < 1200; i++)
+	RT->Clear(D2D1::ColorF(D2D1::ColorF::DeepSkyBlue));
+	static bool init = false;
+	static double f = 0;
+	static double speed = 1.0 / 15.0;
+	static DX::StepTimer atimer;
+	if (!init)
 	{
-		D2D1_POINT_2F p1 = {i,100*sin(i/200.0*_2PI-Current_Radian)+450};
-		D2D1_POINT_2F p2 = {i+1,100*sin((i+1)/200.0*_2PI-Current_Radian)+450};
-		m_RenderTarget->DrawLine(p1, p2, Brush.Get(),2.0);
+		m_deviceresources.GetImage(L"D:\\image\\back.png", RT, am);
+		thread s([&]() 
+		{
+			while (msg.message != WM_QUIT)
+			{
+				atimer.Tick([&]()
+				{
+					double tf = f + 0.02*speed;
+					if (tf > am.size()) f = 0;
+					else f = tf;
+				});
+			}
+		});
+		s.detach();
+		init = true;		
 	}
-
-	m_RenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(600+ 400 * sin(Current_Radian), 300), 10, 10), Brush.Get(),3.0);
-
-	WCHAR mms[8] = { 0 };
-	int elapsed = clock() - start;
-	swprintf_s(mms, L"%d ms", elapsed-elapsed%2);
-	m_RenderTarget->DrawTextW(mms, wcslen(mms), GetDeafaultWriteTextFomat().Get(), D2D1::RectF(0, 0, 250, 50), Brush.Get());*/
-	((ID2D1SolidColorBrush*)Brush.Get())->SetColor(D2D1::ColorF(D2D1::ColorF::White));
-	rain.render(m_RenderTarget.Get(), Brush.Get());
-
+	if (f > am.size())
+		return;
+	RT->DrawBitmap(am[(int)f].Get(), D2D1::RectF(0, 100, Application::RESOLUTION_W,Application::RESOLUTION_H));
 	/*******************************************END************************************/
-	m_RenderTarget->EndDraw();
+	App::Render(RT);
+	RT->EndDraw();
 }
 
 void DemoApp::Update(double deltatime)
 {
+	App::Update(deltatime);
 	Current_Radian += RadianPerSec*deltatime;
-	rain.update(deltatime);
 }

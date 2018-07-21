@@ -109,6 +109,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>d2d1.lib dwrite.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="DemoApp.h" />
     <ClInclude Include="DevicesResource.h" />
     <ClInclude Include="Framework.h" />

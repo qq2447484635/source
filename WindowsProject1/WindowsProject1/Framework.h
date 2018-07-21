@@ -5,10 +5,13 @@
 #include <ctime>
 #include "Resource.h"
 #include <queue>
+#include<list>
 #include "DevicesResource.h"
 #include "StepTimer.h"
+#include "Component.h"
 
 using namespace std;
+
 
 class Framework
 {
@@ -24,11 +27,10 @@ private:
 	virtual BOOL                InitInstance(HINSTANCE, int);
 	static LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 protected:
+	ComPtr<ID2D1HwndRenderTarget> m_RenderTarget;
 	DevicesResouce m_deviceresources;
 	MSG msg = {0};
 	DX::StepTimer m_timer;
-	//DX::StepTimer m_timer2;
-	
 };
 
 inline Framework::Framework()

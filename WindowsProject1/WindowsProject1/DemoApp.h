@@ -7,7 +7,7 @@ class DemoApp:
 public:
 	DemoApp();
 	~DemoApp();
-	void Render();
+	void Render(ID2D1HwndRenderTarget *RT);
 	void Update(double);
 private:
 	D2D1_POINT_2F center;
@@ -17,5 +17,6 @@ private:
 	const float PI = 3.1415926;
 	const float _2PI = 3.1415926 * 2;
 	Rain rain;
+	vector<ComPtr<ID2D1Bitmap>> am;
 };
 
