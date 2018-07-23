@@ -3,7 +3,7 @@
 
 App::App()
 {
-
+	SetVisiable(true);
 }
 
 App::~App()
@@ -21,14 +21,12 @@ void App::RunMessageLoop()
 				m_timer.Tick([&]() {
 					deltatime = m_timer.GetElapsedSeconds();
 					Update(deltatime);
-					Render(m_RenderTarget.Get());
+					if (isVisiable())
+						Render(m_RenderTarget.Get());
 				});
-			/*double interval = (1 / 60.0 - m_timer.GetElapsedSeconds())*1000;
-			if(interval>0)
-				Sleep(interval);*/
+				Sleep(5);
 		}
 	});
-	
 	this->Framework::RunMessageLoop();
 	game_thread.join();
 }

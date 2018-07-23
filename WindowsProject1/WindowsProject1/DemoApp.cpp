@@ -2,7 +2,9 @@
 #include "DemoApp.h"
 #include <cstring>
 
-DemoApp::DemoApp()
+DemoApp::DemoApp() :
+	kla('A'),
+	kld('D')
 {
 	/************FIX FPS****************************/
 	/*m_timer.SetFixedTimeStep(true);
@@ -13,20 +15,26 @@ DemoApp::DemoApp()
 	RadianPerSec = _2PI / 3.0f;
 	length = 150;
 
-	AddComponent(rain);
+
 	thread r2([&]() 
 	{
-		int a = 5;
+		int a = 50;
 		while (a > 0)
 		{
-			Sleep(2500);
-			rain.AddTears(100);
+			Sleep(1000);
+			rain.AddTears(4);
 			a--;
 		}
 	});
 	r2.detach();
+	
+	kla.KeyClicked = [&]() {rain.AddTears(10); };
+	kld.KeyClicked = [&]() {rain.ReduceTears(10); };
+	kla.AttachTo(rain);
+	kld.AttachTo(rain);
+	AddComponent(rain);
+	//SetVisiable(false);
 }
-
 
 DemoApp::~DemoApp()
 {

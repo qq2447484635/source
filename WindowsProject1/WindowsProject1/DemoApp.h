@@ -1,6 +1,7 @@
 #pragma once
 #include "App.h"
 #include "Rain.h"
+#include "KeyListener.h"
 class DemoApp:
 	public App
 {
@@ -17,6 +18,7 @@ private:
 	const float PI = 3.1415926;
 	const float _2PI = 3.1415926 * 2;
 	Rain rain;
+	KeyListener  kla,kld;
 	vector<ComPtr<ID2D1Bitmap>> am;
 };
 

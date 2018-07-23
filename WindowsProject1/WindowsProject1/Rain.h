@@ -24,10 +24,7 @@ class Rain :
 public:
 	Rain()
 	{
-		for (int i = 0; i <100; i++)
-		{
-			tears.push_back(Tear());
-		}
+		SetVisiable(true);
 	}
 
 	~Rain();
@@ -36,6 +33,7 @@ public:
 
 	void Render(ID2D1HwndRenderTarget *rt)
 	{
+		Component::Render(rt);
 		ComPtr<ID2D1SolidColorBrush> brush;
 		rt->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &brush);
 		brush->SetOpacity(0.6);
@@ -47,6 +45,7 @@ public:
 
 	void Update(double deltatime)
 	{
+		Component::Update(deltatime);
 		for (list<Tear>::iterator i = tears.begin(); i != tears.end();)
 		{
 			i->pos.x += i->v.x*deltatime;
@@ -68,6 +67,17 @@ public:
 		for (int i = 0; i < num; i++)
 		{
 			tears.push_back(Tear());
+		}
+	}
+
+	void ReduceTears(int num)
+	{
+		if (tears.size() >= num)
+		{
+			for (int i = 0; i < num; i++)
+			{
+				tears.pop_back();
+			}
 		}
 	}
 };
