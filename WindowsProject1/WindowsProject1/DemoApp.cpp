@@ -33,6 +33,8 @@ DemoApp::DemoApp() :
 	kla.AttachTo(rain);
 	kld.AttachTo(rain);
 	AddComponent(rain);
+	AddComponent(game);
+
 	//SetVisiable(false);
 }
 

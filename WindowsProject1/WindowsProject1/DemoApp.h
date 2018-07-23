@@ -2,6 +2,9 @@
 #include "App.h"
 #include "Rain.h"
 #include "KeyListener.h"
+#include "Box2D/Box2D.h"
+#include "GameTest.h"
+
 class DemoApp:
 	public App
 {
@@ -20,5 +23,6 @@ private:
 	Rain rain;
 	KeyListener  kla,kld;
 	vector<ComPtr<ID2D1Bitmap>> am;
+	GameTest game;
 };
 

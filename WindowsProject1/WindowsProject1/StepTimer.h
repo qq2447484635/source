@@ -4,7 +4,7 @@
 #include <wrl.h>
 
 typedef unsigned long long uint64;
-typedef unsigned long  uint32;
+typedef unsigned int  uint32;
 typedef  long  int64;
 
 namespace DX
