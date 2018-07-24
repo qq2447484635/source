@@ -25,7 +25,7 @@
     <Filter Include="头文件\BASIC\Key">
       <UniqueIdentifier>{5edf1a51-77e6-4b6c-96c7-d40b693e2048}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\BASIC\Game">
+    <Filter Include="头文件\Game">
       <UniqueIdentifier>{3e71537e-2a2a-4842-a302-ff4b4f6b15cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -70,7 +70,10 @@
       <Filter>头文件\BASIC\Key</Filter>
     </ClInclude>
     <ClInclude Include="GameTest.h">
-      <Filter>头文件\BASIC\Game</Filter>
+      <Filter>头文件\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderData.h">
+      <Filter>头文件\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

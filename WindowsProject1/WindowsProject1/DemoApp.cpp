@@ -15,24 +15,6 @@ DemoApp::DemoApp() :
 	RadianPerSec = _2PI / 3.0f;
 	length = 150;
 
-
-	thread r2([&]() 
-	{
-		int a = 50;
-		while (a > 0)
-		{
-			Sleep(1000);
-			rain.AddTears(4);
-			a--;
-		}
-	});
-	r2.detach();
-	
-	kla.KeyClicked = [&]() {rain.AddTears(10); };
-	kld.KeyClicked = [&]() {rain.ReduceTears(10); };
-	kla.AttachTo(rain);
-	kld.AttachTo(rain);
-	AddComponent(rain);
 	AddComponent(game);
 
 	//SetVisiable(false);
@@ -76,7 +58,7 @@ void DemoApp::Render(ID2D1HwndRenderTarget *RT)
 	}
 	if (f > am.size())
 		return;
-	RT->DrawBitmap(am[(int)f].Get(), D2D1::RectF(0, 100, Application::RESOLUTION_W,Application::RESOLUTION_H));
+	//RT->DrawBitmap(am[(int)f].Get(), D2D1::RectF(0, 100, Application::RESOLUTION_W,Application::RESOLUTION_H));
 	/*******************************************END************************************/
 	App::Render(RT);
 	RT->EndDraw();

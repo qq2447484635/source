@@ -23,6 +23,7 @@ public:
 	virtual void RunMessageLoop();
 	virtual void Render() {};
 	virtual void Update(double) {};
+	virtual DevicesResouce& GetResource() { return m_deviceresources; };
 private:
 	virtual ATOM                MyRegisterClass(HINSTANCE hInstance);
 	virtual BOOL                InitInstance(HINSTANCE, int);
